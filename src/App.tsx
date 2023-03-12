@@ -1,7 +1,7 @@
 import Clean from "./groups/clean";
 import Market from "./groups/market";
 import Urgent from "./groups/urgent";
-import Exercise from "./groups/exercise";
+
 import {
   Container,
   Heading,
