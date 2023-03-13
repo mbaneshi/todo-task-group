@@ -11,7 +11,7 @@ import {
   useColorMode,
   VStack,
 } from "@chakra-ui/react";
-import { LockIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
