@@ -8,10 +8,12 @@ import {
   Input,
   Tag,
   Text,
+  Toast,
 } from "@chakra-ui/react";
 
 import { DeleteIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 interface Task {
   id: number;
@@ -28,6 +30,7 @@ function Clean() {
     const completed = tasks.filter((task) => task.completed).length;
     setCompletedTasks(completed);
   }, [tasks]);
+  const toast = useToast();
 
   const handleClick = () => {
     setTasks([
@@ -37,6 +40,19 @@ function Clean() {
     setInputValue("");
   };
 
+  const handleDelete = (task: Task) => {
+    if (task.completed) {
+      toast({
+        title: "Forbiden.",
+        description: "you can not delete done task :)",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+      return;
+    }
+    setTasks(tasks.filter((t) => t.id !== task.id));
+  };
   const handleCheck = (id: number) => {
     setTasks(
       tasks.map((task) => {
@@ -49,11 +65,7 @@ function Clean() {
   };
 
   return (
-    <Box
-      width="100%"
-      height="100%"
-      bgGradient="linear(to-l, teal.300, blue.500)"
-    >
+    <Box bgGradient="linear(to-l, teal.300, blue.500)">
       <Container maxWidth={"100%"}>
         <Flex flexDir="column" paddingTop="25px">
           <Text color={"white"} fontSize={"large"}>
@@ -92,7 +104,7 @@ function Clean() {
           </Flex>
         </Flex>
 
-        <Box height={2000}>
+        <Box height={1000}>
           <Flex
             height="auto"
             width="100%"
@@ -133,7 +145,7 @@ function Clean() {
               <Box width="100%">
                 {tasks.map((task) => (
                   <Flex
-                    width="732px"
+                    width="300px"
                     height="72px"
                     bg="#3333"
                     my="10px"
@@ -157,7 +169,7 @@ function Clean() {
                       color="#f2f2f2"
                       cursor="pointer"
                       onClick={() => {
-                        setTasks(tasks.filter((t) => t.id !== task.id));
+                        handleDelete(task);
                       }}
                     />
                   </Flex>

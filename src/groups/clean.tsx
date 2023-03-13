@@ -65,11 +65,7 @@ function Clean() {
   };
 
   return (
-    <Box
-      width="100%"
-      height="100%"
-      bgGradient="linear(to-l, teal.300, blue.500)"
-    >
+    <Box bgGradient="linear(to-l, teal.300, blue.500)">
       <Container maxWidth={"100%"}>
         <Flex flexDir="column" paddingTop="25px">
           <Text color={"white"} fontSize={"large"}>
